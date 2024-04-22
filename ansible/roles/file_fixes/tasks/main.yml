@@ -1,0 +1,11 @@
+---
+- name: Add line under [sshd] section in Fail2ban config file
+  lineinfile:
+    path: /etc/fail2ban/jail.d/sshd.local # Replace 'your_config_file.conf' with the name of your Fail2ban config file
+    line: "backend=systemd" # Add this line in order for fail2ban to work correctly
+    insertafter: '^\[sshd\]' # Insert after the line that matches [sshd]
+
+- name: Start fail2ban after the change in the file
+  service:
+    name: fail2ban
+    state: started

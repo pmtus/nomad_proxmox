@@ -46,8 +46,8 @@ MEMORY=512
 CORES=1
 SOCKETS=1
 NET_BRIDGE="vmbr1"
-DISK_SIZE="4G"
-DISK_STORE="volumes"
+DISK_SIZE="10G"
+DISK_STORE="zfs_nomad"
 
 install -m 0755 -d "$IMG_DIR"
 if [[ -e $IMG_PATH ]]; then

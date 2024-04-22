@@ -1,6 +1,6 @@
 ---
 common_user: "debian"
-common_timezone: "Asia/Singapore"
+common_timezone: "Europe/Berlin"
 common_keyring_dir: "/etc/apt/keyrings"
 common_nfs_dir: "/mnt/storage"
 common_packages:
@@ -19,7 +19,9 @@ common_packages:
   - qemu-guest-agent
   - bind9-utils
   - ncdu
-common_dotfiles: []
+  - tree
+common_dotfiles:
+  []
   # common_dotfiles:
   #   - url: https://raw.githubusercontent.com/foo/repo/master/vimrc
   #     dest: /home/{{ common_user }}/.vimrc

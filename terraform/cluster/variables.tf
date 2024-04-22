@@ -66,7 +66,7 @@ variable "clients" {
 variable "disk_datastore" {
   type        = string
   description = "Datastore on which to store disk"
-  default     = "volumes"
+  default     = "zfs_nomad"
 }
 
 # variable "server_ip_address" {

@@ -70,7 +70,7 @@ source "proxmox-iso" "base" {
 
   qemu_agent              = true
   cloud_init              = true
-  cloud_init_storage_pool = "volumes"
+  cloud_init_storage_pool = "zfs_nomad"
 
   os              = "l26"
   cores           = var.cores
@@ -86,8 +86,8 @@ source "proxmox-iso" "base" {
   disks {
     type              = "scsi"
     disk_size         = "5G"
-    storage_pool      = "volumes"
-    storage_pool_type = "lvm-thin"
+    storage_pool      = "zfs_nomad"
+    storage_pool_type = "zfs"
     format            = "raw"
   }
 

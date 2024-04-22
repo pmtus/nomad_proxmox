@@ -31,7 +31,7 @@ source "proxmox-clone" "base" {
 
   qemu_agent              = true
   cloud_init              = true
-  cloud_init_storage_pool = "volumes"
+  cloud_init_storage_pool = "zfs_nomad"
 
   vm_id                = var.vm_id
   vm_name              = local.vm_name
@@ -59,6 +59,8 @@ source "proxmox-clone" "base" {
 
   ssh_host             = var.ip_address
   ssh_username         = var.ssh_username
+  ssh_bastion_host     = var.ssh_bastion_host
+  ssh_bastion_username = var.ssh_bastion_username
   ssh_private_key_file = var.ssh_private_key_path
   ssh_port             = 22
   ssh_timeout          = "10m"
@@ -99,6 +101,7 @@ build {
   provisioner "ansible" {
     playbook_file = "../../ansible/playbooks/common.yml"
     extra_arguments = [
+      "-vvv",
       "--extra-vars",
       "user=${var.ssh_username}",
     ]
@@ -107,7 +110,9 @@ build {
     ansible_env_vars = [
       "ANSIBLE_STDOUT_CALLBACK=yaml",
       "ANSIBLE_HOST_KEY_CHECKING=False",
-      "ANSIBLE_CONFIG=../../ansible/ansible.cfg"
+      "ANSIBLE_CONFIG=../../ansible/ansible.cfg",
+      "OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES", # required for macOS
+      "no_proxy=*"                               # required for macOS
     ]
     use_proxy    = false
     pause_before = "5s"

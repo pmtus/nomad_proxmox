@@ -81,3 +81,11 @@ variable "ssh_private_key_path" {
   type        = string
   description = "SSH Private Key Path"
 }
+variable "ssh_bastion_username" {
+  type    = string
+  default = null
+}
+variable "ssh_bastion_host" {
+  type    = string
+  default = null
+}

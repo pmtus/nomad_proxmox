@@ -70,7 +70,7 @@ variable "disk_size" {
 variable "disk_datastore" {
   type        = string
   description = "Datastore on which to store disk"
-  default     = "volumes"
+  default     = "zfs_nomad"
 }
 
 variable "ip_address" {

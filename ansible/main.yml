@@ -6,6 +6,9 @@
     - name: Wait for cloud-init
       command: cloud-init status --wait
       changed_when: false
+    - name: Set TAILSCALE_AUTHKEY environment variable
+      ansible.builtin.shell: |
+        export TAILSCALE_AUTHKEY='tskey-auth-kyPnnPT4uE11CNTRL-rn5zPoqheKgigN3oG411LgR6HQhxbjZqh'
 
   roles:
     - name: Create root, intermediate CA for Vault
@@ -17,6 +20,12 @@
     - role: consul-template
     - role: consul
     - role: nomad
+    - role: jason_riddle.tailscale
+      vars:
+        tailscale_up_node: true
+        tailscale_up_authkey: "{{ lookup('env', 'TAILSCALE_AUTHKEY') }}"
+        # Optional: Specify args to `tailscale up` command.
+        tailscale_up_extra_args: "--hostname={{ lookup('env', 'HOSTNAME') }}-{{ ansible_distribution|lower }}"
 
   tasks:
     - name: Goss smoke test
@@ -33,6 +42,9 @@
     - name: Wait for cloud-init
       command: cloud-init status --wait
       changed_when: false
+    - name: Set TAILSCALE_AUTHKEY environment variable
+      ansible.builtin.shell: |
+        export TAILSCALE_AUTHKEY='tskey-auth-kyPnnPT4uE11CNTRL-rn5zPoqheKgigN3oG411LgR6HQhxbjZqh'
 
   roles:
     - name: Mount NFS shares on client
@@ -51,6 +63,13 @@
       vars:
         nomad_server: false
         nomad_client: true
+
+    - role: jason_riddle.tailscale
+      vars:
+        tailscale_up_node: true
+        tailscale_up_authkey: "{{ lookup('env', 'TAILSCALE_AUTHKEY') }}"
+        # Optional: Specify args to `tailscale up` command.
+        tailscale_up_extra_args: "--hostname={{ lookup('env', 'HOSTNAME') }}-{{ ansible_distribution|lower }}"
 
   tasks:
     - name: Allow HTTP, HTTPS ports on ufw

@@ -92,11 +92,11 @@
     client_cert: "{{ local_cert_dir }}/ansible.crt"
     client_key: "{{ local_cert_dir }}/ansible_key.pem"
     ca_path: "{{ local_cert_dir }}/vault-ca.crt"
-    body: "{ \"name\": \"ansible\" }"
+    body: '{ "name": "ansible" }'
     body_format: json
     return_content: true
   register: vault_ansible_token_raw
-  no_log: true
+  no_log: false
   changed_when: false
   delegate_to: localhost
 
