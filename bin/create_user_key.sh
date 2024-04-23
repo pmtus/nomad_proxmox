@@ -12,8 +12,7 @@ username=$1
 # Check if the user is root and change the key_dir to not include /home
 if [ "$username" == "root" ]; then
     key_dir="/root/.ssh"
-else
-    key_dir="/home/$username/.ssh"
+else key_dir="/home/$username/.ssh"
 key_file="$key_dir/id_ed25519"
 
 if [ -f "$key_file" ]; then
