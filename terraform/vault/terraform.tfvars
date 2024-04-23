@@ -1,0 +1,12 @@
+vault_address            = "https://localhost:8200"
+vault_token              = "token"
+vault_ca_cert_file       = "../../certs/vault-ca.crt"
+vault_audit_path         = "/opt/vault/logs/vault.log"
+admin_password           = "admin"
+kvuser_password          = "admin"
+allowed_server_domains   = ["service.consul", "dc1.consul", "dc1.nomad", "global.nomad"]
+allowed_client_domains   = ["service.consul", "dc1.consul", "dc1.nomad", "global.nomad"]
+allowed_auth_domains     = ["global.vault"]
+allowed_vault_domains    = ["vault.service.consul", "global.vault"]
+ansible_public_key_path  = "../../certs/ansible.crt"
+ansible_private_key_path = "../../certs/ansible_key.pem"
